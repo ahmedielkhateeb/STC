@@ -57,7 +57,7 @@ public class ItemsController {
         Files file = itemsService.downloadFile(id, userEmail);
         String[] fileNameArray = file.getItemId().getName().replace("\\", "#").split("#");
         String fileName = file.getItemId().getName().replace("\\", "#").split("#")[fileNameArray.length - 1];
-        return ResponseEntity.ok().header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + fileName + "\"").body(file.getBinary());
+        return ResponseEntity.ok().contentType(MediaType.parseMediaType("image/png")).header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + fileName + "\"").body(file.getBinary());
     }
 }
 
