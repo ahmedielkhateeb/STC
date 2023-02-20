@@ -39,7 +39,7 @@ public class ItemsController {
         return new ResponseEntity<>(itemsService.createFolder(space, itemsDTO), HttpStatus.CREATED);
     }
 
-    @PostMapping(value = "/file/{space}/{folder}")
+    @PostMapping(value = "/file/{space}/{folder}", consumes = {MediaType.MULTIPART_FORM_DATA_VALUE})
     public ResponseEntity<Long> createItemsFile(@PathVariable @Valid @NotNull String space, @PathVariable @Valid @NotNull String folder, @ModelAttribute @Valid ItemsDTO itemsDTO) throws NotFoundException, InsufficientPrivilege, IOException, AlreadyFoundException {
         STCLogger.business.info("start receiving create file request under space {} and folder {}", space, folder);
         return new ResponseEntity<>(itemsService.createFile(space, folder, itemsDTO), HttpStatus.CREATED);
@@ -55,8 +55,8 @@ public class ItemsController {
     public ResponseEntity<byte[]> downloadFile(@PathVariable Long id, @RequestHeader("userEmail") @Valid @NotNull String userEmail) throws NotFoundException, InsufficientPrivilege {
         STCLogger.business.info("start receiving download file request with id " + id);
         Files file = itemsService.downloadFile(id, userEmail);
-        String[] fileNameArray = file.getItemId().getName().replace("\\", "-").split("#");
-        String fileName = file.getItemId().getName().replace("\\", "-").split("#")[fileNameArray.length - 1];
+        String[] fileNameArray = file.getItemId().getName().replace("\\", "#").split("#");
+        String fileName = file.getItemId().getName().replace("\\", "#").split("#")[fileNameArray.length - 1];
         return ResponseEntity.ok().header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + fileName + "\"").body(file.getBinary());
     }
 }

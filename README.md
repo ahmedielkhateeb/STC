@@ -5,7 +5,7 @@
 
 2 - sql
 
-3 - system design spring boot (note that there is a bug in swagger in uploading files it works from postman but not uploading the file from swagger)
+3 - system design spring boot
 
 ## Information about the Application
 
@@ -51,10 +51,10 @@ Consider design a system for managing upload/download files, with the below crit
 - DB Name : stc-db
 - DB Username : postgres
 - DB Password : P@ssw0rd
-- you can access the Application throw http://localhost:8080/stc/swagger-ui.html
+- you can access the Application throw http://localhost:8080/stc/swagger-ui/index.html
 
 # Provided Apis
-- http://localhost:8080/stc/swagger-ui.html
+- http://localhost:8080/stc/swagger-ui/index.html
 
 # Important Notes
 - application have only two permission groups
